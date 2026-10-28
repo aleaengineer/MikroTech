@@ -1,0 +1,11 @@
+<%- include('partials/head') %>
+<section class="section error-section">
+  <div class="container error-panel">
+    <span class="eyebrow">MIKROTECH / STATUS</span>
+    <span class="error-code"><%= pageTitle === 'Halaman tidak ditemukan' || pageTitle.includes('tidak ditemukan') ? '404' : '!' %></span>
+    <h1><%= pageTitle %></h1>
+    <p><%= message %></p>
+    <a class="button button-dark" href="/">Kembali ke beranda</a>
+  </div>
+</section>
+<%- include('partials/footer') %>

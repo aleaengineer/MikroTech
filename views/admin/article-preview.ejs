@@ -1,0 +1,24 @@
+<%- include('../partials/head') %>
+<div class="preview-banner">
+  <div class="container preview-banner-inner"><span><strong>PRATINJAU</strong> · Artikel ini belum disimpan atau diterbitkan.</span><a class="button button-light" href="<%= returnTo %>">← Kembali ke editor</a></div>
+</div>
+<section class="article-header">
+  <div class="container article-header-inner">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Beranda</a><span>/</span><a href="/artikel">Artikel</a><span>/</span><a href="/kategori/<%= article.category_slug %>"><%= article.category_name %></a></nav>
+    <span class="eyebrow"><%= article.category_name %> <span class="eyebrow-divider">/</span> PRATINJAU</span>
+    <h1><%= article.title %></h1>
+    <p class="article-summary"><%= article.summary %></p>
+    <div class="article-meta"><span class="meta-dot"></span> Pratinjau artikel</div>
+  </div>
+</section>
+<article class="container article-layout">
+  <div class="article-content">
+    <% if (article.image_url) { %><img class="article-cover" src="<%= article.image_url %>" alt="Ilustrasi untuk <%= article.title %>"><% } %>
+    <div class="article-prose"><%- article.contentHtml %></div>
+    <div class="article-callout"><span class="callout-icon">i</span><p>Selalu sesuaikan konfigurasi dengan kondisi jaringan dan versi RouterOS yang digunakan.</p></div>
+  </div>
+  <aside class="article-aside">
+    <div class="aside-card"><span class="eyebrow">MODE PRATINJAU</span><h2>Belum dipublikasikan</h2><p>Halaman ini hanya terlihat untuk admin. Kembali ke editor untuk melakukan perubahan atau menyimpan artikel.</p><a class="button button-dark" href="<%= returnTo %>">Kembali ke editor</a></div>
+  </aside>
+</article>
+<%- include('../partials/footer') %>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= pageTitle ? `${pageTitle} | ${siteName}` : siteName %></title>
+  <meta name="description" content="<%= pageDescription || 'Panduan MikroTik yang praktis dan mudah dipahami.' %>">
+  <meta name="theme-color" content="#071b2e">
+  <link rel="icon" type="image/jpeg" href="/logo.jpg">
+  <link rel="stylesheet" href="/styles.css?v=3">
+  <script src="/app.js?v=3" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="MikroTech - Beranda">
+        <img class="brand-logo" src="/logo.jpg" alt="">
+        <span>Mikro<span class="brand-accent">Tech</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Navigasi utama">
+        <a href="/artikel">Artikel</a>
+        <a href="/faq">FAQ</a>
+        <a href="/kontak">Kontak</a>
+        <a href="/tentang">Tentang</a>
+        <% if (adminUsername) { %>
+          <a href="/admin">Dashboard</a>
+          <a href="/admin/profile">Profil</a>
+          <a href="/admin/settings">Pengaturan</a>
+        <% } else { %>
+          <a href="/admin/login">Admin</a>
+        <% } %>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <% if (notice) { %>
+      <div class="container notice notice-<%= notice.type %>" role="status"><%= notice.message %></div>
+    <% } %>

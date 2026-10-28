@@ -1,0 +1,32 @@
+<%- include('../partials/head') %>
+<section class="admin-page">
+  <div class="container">
+    <div class="admin-heading">
+      <div><span class="eyebrow">INBOX / CONTACT</span><h1>Pesan masuk</h1><p>Pertanyaan dan masukan dari formulir kontak MikroTech.</p></div>
+      <a class="button button-light" href="/admin">← Dashboard</a>
+    </div>
+    <% if (messages.length) { %>
+      <div class="message-list">
+        <% messages.forEach((message) => { %>
+          <article class="message-card <%= message.is_read ? 'message-read' : 'message-unread' %>">
+            <div class="message-heading">
+              <div><span class="status-badge <%= message.is_read ? 'status-published' : 'status-draft' %>"><%= message.is_read ? 'Dibaca' : 'Baru' %></span><h2><%= message.subject %></h2></div>
+              <time datetime="<%= new Date(message.created_at).toISOString() %>"><%= new Intl.DateTimeFormat('id-ID', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(message.created_at)) %></time>
+            </div>
+            <p class="message-sender"><strong><%= message.name %></strong> · <a href="mailto:<%= message.email %>"><%= message.email %></a></p>
+            <p class="message-body"><%= message.message %></p>
+            <div class="message-actions">
+              <% if (!message.is_read) { %><form method="post" action="/admin/pesan/<%= message.id %>/baca"><input type="hidden" name="_csrf" value="<%= csrfToken %>"><button class="button button-light" type="submit">Tandai dibaca</button></form><% } %>
+              <a class="button button-light" href="mailto:<%= message.email %>?subject=<%= encodeURIComponent(`Re: ${message.subject}`) %>">Balas lewat email</a>
+              <form method="post" action="/admin/pesan/<%= message.id %>/hapus" onsubmit="return confirm('Hapus pesan ini? Tindakan ini tidak dapat dibatalkan.')"><input type="hidden" name="_csrf" value="<%= csrfToken %>"><button class="danger-link" type="submit">Hapus pesan</button></form>
+            </div>
+          </article>
+        <% }) %>
+      </div>
+      <% if (messages.length === 100) { %><p class="empty-copy">Menampilkan 100 pesan terbaru.</p><% } %>
+    <% } else { %>
+      <div class="empty-state empty-panel"><span class="empty-symbol">✉</span><h2>Belum ada pesan</h2><p>Pesan yang dikirim dari halaman Kontak akan muncul di sini.</p><a class="button button-dark" href="/kontak">Lihat halaman kontak</a></div>
+    <% } %>
+  </div>
+</section>
+<%- include('../partials/footer') %>

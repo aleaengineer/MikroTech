@@ -1,0 +1,38 @@
+<%- include('../partials/head') %>
+<section class="admin-page">
+  <div class="container">
+    <div class="admin-heading">
+      <div><span class="eyebrow">CONTENT MANAGER / TAXONOMY</span><h1>Kelola kategori</h1><p>Atur topik agar panduan mudah ditemukan.</p></div>
+      <a class="button button-light" href="/admin">← Dashboard</a>
+    </div>
+    <div class="category-admin-grid">
+      <div class="editor-form category-editor">
+        <h2><%= editingId ? 'Ubah kategori' : 'Tambah kategori' %></h2>
+        <% if (errors.length) { %><div class="form-alert" role="alert"><ul><% errors.forEach((error) => { %><li><%= error %></li><% }) %></ul></div><% } %>
+        <form method="post" action="<%= editingId ? `/admin/kategori/${editingId}` : '/admin/kategori' %>" class="stack-form">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <label for="name">Nama kategori</label>
+          <input id="name" name="name" value="<%= category.name || '' %>" required minlength="2" maxlength="100" placeholder="Contoh: Routing">
+          <label for="slug">Slug URL</label>
+          <input id="slug" name="slug" value="<%= category.slug || '' %>" maxlength="120" placeholder="routing">
+          <small>Kosongkan untuk dibuat otomatis dari nama.</small>
+          <div class="form-actions"><% if (editingId) { %><a class="button button-light" href="/admin/kategori">Batal</a><% } %><button class="button button-primary" type="submit"><%= editingId ? 'Simpan perubahan' : 'Tambah kategori' %></button></div>
+        </form>
+      </div>
+      <div class="editor-form category-list-panel">
+        <h2>Kategori tersedia <span class="count-pill"><%= categories.length %></span></h2>
+        <% if (categories.length) { %>
+          <div class="category-admin-list">
+            <% categories.forEach((item) => { %>
+              <div class="category-admin-item">
+                <div><strong><%= item.name %></strong><small>/<%= item.slug %> · <%= item.article_count %> artikel</small></div>
+                <a class="text-link" href="/admin/kategori/<%= item.id %>/edit">Ubah</a>
+              </div>
+            <% }) %>
+          </div>
+        <% } else { %><p class="empty-copy">Belum ada kategori.</p><% } %>
+      </div>
+    </div>
+  </div>
+</section>
+<%- include('../partials/footer') %>

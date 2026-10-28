@@ -1,0 +1,31 @@
+{
+  "name": "mikrotech",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Panduan belajar MikroTik, langkah demi langkah.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "node --watch src/app.js",
+    "create-admin": "node scripts/create-admin.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-mysql-session": "^3.0.3",
+    "express-rate-limit": "^8.0.1",
+    "express-session": "^1.18.2",
+    "helmet": "^8.1.0",
+    "markdown-it": "^15.0.3",
+    "mysql2": "^3.24.6"
+  },
+  "overrides": {
+    "mysql2": "^3.24.6"
+  }
+}

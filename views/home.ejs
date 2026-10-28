@@ -1,0 +1,73 @@
+<%- include('partials/head') %>
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow hero-eyebrow"><span class="status-dot"></span> NETWORK KNOWLEDGE BASE</span>
+      <h1>Belajar MikroTik,<br><span>langkah demi langkah.</span></h1>
+      <p>Panduan praktis untuk membangun, mengelola, dan memahami jaringan dengan MikroTik.</p>
+      <form class="search-form hero-search" action="/artikel" method="get" role="search">
+        <label class="sr-only" for="hero-search">Cari artikel atau konfigurasi</label>
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input id="hero-search" type="search" name="q" placeholder="Cari artikel atau konfigurasi..." maxlength="100">
+        <button class="button button-primary" type="submit">Cari panduan</button>
+      </form>
+      <div class="hero-proof"><span class="proof-icon">✓</span> Panduan jelas <span>·</span> Konfigurasi praktis <span>·</span> Untuk semua level</div>
+    </div>
+    <div class="network-visual" aria-hidden="true">
+      <div class="visual-grid"></div>
+      <div class="router-device">
+        <span class="router-logo">Mikro<span>Tech</span></span>
+        <div class="router-slots"><i></i><i></i><i></i><i></i><i></i></div>
+        <span class="router-caption">ROUTER / CORE-01</span>
+      </div>
+      <span class="visual-label label-top">LAN / 192.168.10.0</span>
+      <span class="visual-label label-right">WAN / INTERNET</span>
+      <span class="visual-label label-bottom">CLIENTS / 024</span>
+      <span class="visual-pulse pulse-a"></span>
+      <span class="visual-pulse pulse-b"></span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <div><span class="eyebrow">JELAJAHI MATERI</span><h2>Mulai dari topik yang kamu butuhkan</h2></div>
+      <a class="text-link" href="/artikel">Semua artikel <span aria-hidden="true">→</span></a>
+    </div>
+    <% if (categories.length) { %>
+      <div class="category-grid">
+        <% categories.forEach((category, index) => { %>
+          <a class="category-card" href="/kategori/<%= category.slug %>">
+            <span class="category-index">0<%= index + 1 %></span>
+            <span class="category-name"><%= category.name %></span>
+            <span class="category-arrow" aria-hidden="true">↗</span>
+          </a>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <p class="empty-state">Kategori materi akan tampil di sini.</p>
+    <% } %>
+  </div>
+</section>
+
+<section class="section section-muted">
+  <div class="container">
+    <div class="section-heading">
+      <div><span class="eyebrow">DARI KNOWLEDGE BASE</span><h2>Artikel terbaru</h2></div>
+      <a class="text-link" href="/artikel">Lihat semua artikel <span aria-hidden="true">→</span></a>
+    </div>
+    <% if (articles.length) { %>
+      <div class="article-grid">
+        <% articles.forEach((article) => { %><%- include('partials/article-card', { article }) %><% }) %>
+      </div>
+    <% } else { %>
+      <div class="empty-state empty-panel">
+        <span class="empty-symbol">⌁</span>
+        <h3>Konten segera hadir</h3>
+        <p>Artikel MikroTik akan muncul di sini setelah diterbitkan oleh admin.</p>
+      </div>
+    <% } %>
+  </div>
+</section>
+<%- include('partials/footer') %>

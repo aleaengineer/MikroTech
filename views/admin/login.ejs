@@ -1,0 +1,20 @@
+<%- include('../partials/head') %>
+<section class="section admin-auth-section">
+  <div class="auth-card">
+    <a class="brand auth-brand" href="/" aria-label="Kembali ke beranda MikroTech"><img class="brand-logo" src="/logo.jpg" alt=""><span>Mikro<span class="brand-accent">Tech</span></span></a>
+    <span class="eyebrow">AREA TERBATAS</span>
+    <h1>Login admin</h1>
+    <p>Masuk untuk mengelola artikel dan kategori MikroTech.</p>
+    <% if (error) { %><div class="form-alert" role="alert"><%= error %></div><% } %>
+    <form method="post" action="/admin/login" class="stack-form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" autocomplete="username" required maxlength="80">
+      <label for="password">Kata sandi</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+      <button class="button button-primary button-full" type="submit">Masuk ke dashboard <span aria-hidden="true">→</span></button>
+    </form>
+    <a class="subtle-link" href="/">← Kembali ke situs</a>
+  </div>
+</section>
+<%- include('../partials/footer') %>

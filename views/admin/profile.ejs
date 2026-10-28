@@ -1,0 +1,46 @@
+<%- include('../partials/head') %>
+<section class="admin-page">
+  <div class="container narrow-container">
+    <div class="admin-heading compact-heading">
+      <div><span class="eyebrow">ACCOUNT / PROFILE</span><h1>Profil admin</h1><p>Kelola username dan keamanan akun admin.</p></div>
+      <a class="button button-light" href="/admin">← Dashboard</a>
+    </div>
+    <% if (errors.length) { %><div class="form-alert" role="alert"><strong>Periksa kembali:</strong><ul><% errors.forEach((error) => { %><li><%= error %></li><% }) %></ul></div><% } %>
+    <div class="profile-grid">
+      <section class="editor-form">
+        <span class="eyebrow">INFORMASI AKUN</span>
+        <h2>Detail profil</h2>
+        <div class="profile-meta">
+          <div class="profile-avatar"><%= admin.username.slice(0, 1).toUpperCase() %></div>
+          <div><strong><%= admin.username %></strong><span>Administrator MikroTech</span></div>
+        </div>
+        <p class="profile-created">Akun dibuat <%= new Intl.DateTimeFormat('id-ID', { dateStyle: 'long' }).format(new Date(admin.created_at)) %>.</p>
+        <form method="post" action="/admin/profile" class="stack-form">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <label for="username">Username</label>
+          <input id="username" name="username" value="<%= admin.username %>" required minlength="3" maxlength="80" autocomplete="username">
+          <label for="profile-current-password">Kata sandi saat ini</label>
+          <input id="profile-current-password" name="current_password" type="password" required autocomplete="current-password">
+          <small>Kata sandi saat ini diperlukan untuk menyimpan perubahan username.</small>
+          <div class="form-actions"><button class="button button-primary" type="submit">Simpan profil</button></div>
+        </form>
+      </section>
+      <section class="editor-form">
+        <span class="eyebrow">SECURITY / PASSWORD</span>
+        <h2>Ubah kata sandi</h2>
+        <p class="settings-help">Gunakan kata sandi unik dengan minimal 6 karakter.</p>
+        <form method="post" action="/admin/profile/password" class="stack-form">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <label for="password-current">Kata sandi saat ini</label>
+          <input id="password-current" name="current_password" type="password" required autocomplete="current-password">
+          <label for="password-new">Kata sandi baru</label>
+          <input id="password-new" name="new_password" type="password" required minlength="6" maxlength="128" autocomplete="new-password">
+          <label for="password-confirm">Konfirmasi kata sandi baru</label>
+          <input id="password-confirm" name="confirm_password" type="password" required minlength="6" maxlength="128" autocomplete="new-password">
+          <div class="form-actions"><button class="button button-primary" type="submit">Ubah kata sandi</button></div>
+        </form>
+      </section>
+    </div>
+  </div>
+</section>
+<%- include('../partials/footer') %>

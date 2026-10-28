@@ -1,0 +1,38 @@
+<%- include('partials/head') %>
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <div><span class="eyebrow">MIKROTECH / KNOWLEDGE BASE</span><h1><%= pageTitle %></h1>
+      <p>Temukan panduan konfigurasi dan materi jaringan yang kamu perlukan.</p></div>
+    <span class="page-hero-code">DOCS_ / <%= String(articles.length).padStart(2, '0') %></span>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <form class="filter-bar" action="/artikel" method="get" role="search">
+      <label class="sr-only" for="article-search">Cari artikel</label>
+      <input id="article-search" type="search" name="q" value="<%= search %>" placeholder="Cari judul, topik, konfigurasi..." maxlength="100">
+      <label class="sr-only" for="category-filter">Pilih kategori</label>
+      <select id="category-filter" name="kategori">
+        <option value="">Semua kategori</option>
+        <% categories.forEach((category) => { %>
+          <option value="<%= category.slug %>" <%= categorySlug === category.slug ? 'selected' : '' %>><%= category.name %></option>
+        <% }) %>
+      </select>
+      <button class="button button-dark" type="submit">Terapkan filter</button>
+    </form>
+    <div class="results-caption"><span><%= selectedCategory ? selectedCategory.name : 'Semua materi' %></span><span><%= articles.length %> artikel</span></div>
+    <% if (articles.length) { %>
+      <div class="article-grid">
+        <% articles.forEach((article) => { %><%- include('partials/article-card', { article }) %><% }) %>
+      </div>
+    <% } else { %>
+      <div class="empty-state empty-panel">
+        <span class="empty-symbol">⌕</span>
+        <h2>Belum ada artikel yang cocok</h2>
+        <p>Coba kata kunci lain atau pilih kategori yang berbeda.</p>
+        <a class="button button-dark" href="/artikel">Lihat semua artikel</a>
+      </div>
+    <% } %>
+  </div>
+</section>
+<%- include('partials/footer') %>

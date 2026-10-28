@@ -1,0 +1,49 @@
+<%- include('../partials/head') %>
+<section class="admin-page">
+  <div class="container">
+    <div class="admin-heading">
+      <div><span class="eyebrow">MIKROTECH / CONTROL ROOM</span><h1>Dashboard</h1><p>Kelola artikel dan kategori knowledge base.</p></div>
+      <div class="admin-actions">
+        <a class="button button-primary" href="/admin/artikel/baru">＋ Tulis artikel</a>
+        <a class="button button-light" href="/admin/kategori">Kelola kategori</a>
+        <a class="button button-light" href="/admin/profile">Profil</a>
+        <a class="button button-light" href="/admin/settings">Pengaturan</a>
+        <a class="button button-light" href="/admin/pesan">Pesan<% if (unreadMessageCount) { %> <span class="count-pill"><%= unreadMessageCount %></span><% } %></a>
+        <form method="post" action="/admin/logout"><input type="hidden" name="_csrf" value="<%= csrfToken %>"><button class="button button-outline" type="submit">Keluar</button></form>
+      </div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card"><span>Total artikel</span><strong><%= counts.article_count || 0 %></strong><small>Semua status</small></div>
+      <div class="stat-card"><span>Terbit</span><strong><%= counts.published_count || 0 %></strong><small>Tampil untuk pengunjung</small></div>
+      <div class="stat-card"><span>Draf</span><strong><%= counts.draft_count || 0 %></strong><small>Belum dipublikasikan</small></div>
+    </div>
+    <div class="admin-table-heading"><div><span class="eyebrow">CONTENT MANAGER</span><h2>Daftar artikel</h2></div><a class="text-link" href="/artikel">Lihat situs publik ↗</a></div>
+    <% if (articles.length) { %>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Artikel</th><th>Kategori</th><th>Status</th><th>Diperbarui</th><th>Aksi</th></tr></thead>
+          <tbody>
+            <% articles.forEach((article) => { %>
+              <tr>
+                <td><strong><%= article.title %></strong><small>/<%= article.slug %></small></td>
+                <td><%= article.category_name %></td>
+                <td><span class="status-badge status-<%= article.status %>"><%= article.status === 'published' ? 'Terbit' : 'Draf' %></span></td>
+                <td><%= new Intl.DateTimeFormat('id-ID', { dateStyle: 'medium' }).format(new Date(article.updated_at)) %></td>
+                <td class="table-actions">
+                  <a class="text-link" href="/admin/artikel/<%= article.id %>/edit">Ubah</a>
+                  <% if (article.status === 'published') { %><a class="text-link" href="/artikel/<%= article.slug %>">Lihat</a><% } %>
+                  <form method="post" action="/admin/artikel/<%= article.id %>/hapus" onsubmit="return confirm('Hapus artikel ini? Tindakan ini tidak dapat dibatalkan.')">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>"><button class="danger-link" type="submit">Hapus</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } else { %>
+      <div class="empty-state empty-panel"><span class="empty-symbol">＋</span><h2>Belum ada artikel</h2><p>Mulai isi knowledge base dengan panduan pertama.</p><a class="button button-dark" href="/admin/artikel/baru">Tulis artikel pertama</a></div>
+    <% } %>
+  </div>
+</section>
+<%- include('../partials/footer') %>

@@ -1,0 +1,27 @@
+<%- include('../partials/head') %>
+<section class="admin-page">
+  <div class="container narrow-container">
+    <div class="admin-heading compact-heading">
+      <div><span class="eyebrow">CONTENT MANAGER / ARTICLE</span><h1><%= formTitle %></h1><p>Isi materi dengan langkah yang jelas dan konfigurasi yang aman.</p></div>
+      <a class="button button-light" href="/admin">← Dashboard</a>
+    </div>
+    <% if (errors.length) { %>
+      <div class="form-alert" role="alert"><strong>Periksa kembali formulir:</strong><ul><% errors.forEach((error) => { %><li><%= error %></li><% }) %></ul></div>
+    <% } %>
+    <form class="editor-form" method="post" action="<%= action %>">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <input type="hidden" name="return_to" value="<%= action %>">
+      <div class="form-grid">
+        <div class="field field-wide"><label for="title">Judul artikel</label><input id="title" name="title" value="<%= article.title || '' %>" required minlength="3" maxlength="180" placeholder="Contoh: Konfigurasi DHCP Server"></div>
+        <div class="field"><label for="slug">Slug URL</label><input id="slug" name="slug" value="<%= article.slug || '' %>" maxlength="200" placeholder="konfigurasi-dhcp-server"><small>Kosongkan untuk dibuat otomatis dari judul.</small></div>
+        <div class="field"><label for="category_id">Kategori</label><select id="category_id" name="category_id" required><option value="">Pilih kategori</option><% categories.forEach((category) => { %><option value="<%= category.id %>" <%= String(article.category_id) === String(category.id) ? 'selected' : '' %>><%= category.name %></option><% }) %></select></div>
+        <div class="field field-wide"><label for="summary">Ringkasan</label><textarea id="summary" name="summary" rows="3" required minlength="10" maxlength="300" placeholder="Jelaskan isi dan manfaat panduan secara singkat."><%= article.summary || '' %></textarea><small>Maksimal 300 karakter.</small></div>
+        <div class="field field-wide"><label for="content">Isi artikel</label><textarea id="content" class="content-editor" name="content" rows="18" required maxlength="100000" placeholder="Tempel artikel di sini. Gunakan Markdown seperti ### Subjudul, **teks tebal**, --- untuk garis, - untuk daftar, dan ``` untuk blok kode."><%= article.content || '' %></textarea><small>Markdown otomatis dirender di halaman artikel, termasuk artikel tanpa baris baru: ### subjudul, **tebal**, --- garis, * atau - daftar, dan ```routeros untuk blok konfigurasi.</small></div>
+        <div class="field field-wide"><label for="image_url">URL gambar <span class="optional-label">Opsional</span></label><input id="image_url" name="image_url" type="url" value="<%= article.image_url || '' %>" maxlength="2048" placeholder="https://contoh.com/gambar.jpg"><small>Gunakan URL gambar HTTP atau HTTPS.</small></div>
+        <div class="field"><label for="status">Status publikasi</label><select id="status" name="status" required><option value="draft" <%= article.status === 'draft' ? 'selected' : '' %>>Draf</option><option value="published" <%= article.status === 'published' ? 'selected' : '' %>>Terbit</option></select></div>
+      </div>
+      <div class="form-actions"><a class="button button-light" href="/admin">Batal</a><button class="button button-light" type="submit" formaction="/admin/artikel/preview" formmethod="post" formtarget="_blank">Pratinjau</button><button class="button button-primary" type="submit">Simpan artikel</button></div>
+    </form>
+  </div>
+</section>
+<%- include('../partials/footer') %>

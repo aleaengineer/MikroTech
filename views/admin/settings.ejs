@@ -1,0 +1,35 @@
+<%- include('../partials/head') %>
+<section class="admin-page">
+  <div class="container narrow-container">
+    <div class="admin-heading compact-heading">
+      <div><span class="eyebrow">SITE / CONFIGURATION</span><h1>Pengaturan situs</h1><p>Atur identitas dan informasi dasar MikroTech.</p></div>
+      <a class="button button-light" href="/admin">← Dashboard</a>
+    </div>
+    <% if (errors.length) { %><div class="form-alert" role="alert"><strong>Periksa kembali:</strong><ul><% errors.forEach((error) => { %><li><%= error %></li><% }) %></ul></div><% } %>
+    <form class="editor-form settings-form" method="post" action="/admin/settings">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <span class="eyebrow">BRAND IDENTITY</span>
+      <h2>Identitas situs</h2>
+      <p class="settings-help">Nama situs tampil pada judul browser. Tagline digunakan di footer, sedangkan deskripsi membantu mesin pencari memahami situs.</p>
+      <div class="form-grid">
+        <div class="field field-wide">
+          <label for="site_name">Nama situs</label>
+          <input id="site_name" name="site_name" value="<%= settings.site_name %>" required minlength="2" maxlength="60">
+          <small>2–60 karakter.</small>
+        </div>
+        <div class="field field-wide">
+          <label for="site_tagline">Tagline</label>
+          <input id="site_tagline" name="site_tagline" value="<%= settings.site_tagline %>" required minlength="5" maxlength="120">
+          <small>5–120 karakter.</small>
+        </div>
+        <div class="field field-wide">
+          <label for="site_description">Deskripsi situs</label>
+          <textarea id="site_description" name="site_description" rows="4" required minlength="20" maxlength="300"><%= settings.site_description %></textarea>
+          <small>20–300 karakter; digunakan sebagai deskripsi standar halaman.</small>
+        </div>
+      </div>
+      <div class="form-actions"><a class="button button-light" href="/admin">Batal</a><button class="button button-primary" type="submit">Simpan pengaturan</button></div>
+    </form>
+  </div>
+</section>
+<%- include('../partials/footer') %>
