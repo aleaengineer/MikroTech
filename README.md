@@ -1,239 +1,182 @@
-# MikroTech
+<div align="center">
+  <img src="./logo.jpg" alt="Logo MikroTech" width="116">
 
-MikroTech adalah webapp edukasi yang membahas MikroTik melalui artikel dan panduan konfigurasi. Dokumen ini menjadi acuan fitur, teknologi, dan alur pengembangan aplikasi.
+  <h1>MikroTech</h1>
+  <p><strong>Belajar MikroTik, langkah demi langkah.</strong></p>
+  <p>Ruang belajar modern untuk memahami jaringan dan menguasai konfigurasi MikroTik.</p>
 
-## Tujuan
+  <p>
+    <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-20%2B-339933?style=flat-square&logo=nodedotjs&logoColor=white" alt="Node.js 20 atau lebih baru"></a>
+    <a href="https://expressjs.com/"><img src="https://img.shields.io/badge/Express-5-111111?style=flat-square&logo=express&logoColor=white" alt="Express 5"></a>
+    <a href="https://www.mysql.com/"><img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white" alt="MySQL"></a>
+  </p>
 
-- Menyajikan materi MikroTik yang terstruktur dan mudah dipahami, dari pemula hingga pengguna berpengalaman.
-- Memudahkan pengunjung menemukan panduan berdasarkan topik atau pencarian.
-- Memungkinkan admin mengelola dan menerbitkan konten melalui panel admin.
+  <p>
+    <a href="#-mulai-cepat">Mulai cepat</a> ·
+    <a href="#-fitur-unggulan">Fitur</a> ·
+    <a href="#-teknologi">Teknologi</a> ·
+    <a href="#-kontribusi">Kontribusi</a>
+  </p>
+</div>
 
-## Teknologi
+---
 
-- **Node.js** sebagai runtime aplikasi.
-- **Express** untuk server dan routing.
-- **EJS** untuk merender halaman dari template server-side.
-- **MySQL** sebagai basis data, dapat dijalankan melalui XAMPP untuk pengembangan lokal.
-- **CSS khusus** dengan tema Modern Network Lab untuk membangun tampilan responsif.
-- **Express Session + MySQL session store** untuk sesi admin.
-- **Helmet, pembatasan percobaan login, dan token CSRF** untuk perlindungan dasar aplikasi.
+## Tentang MikroTech
 
-Node.js dijalankan sebagai proses terpisah dari Apache XAMPP. MySQL XAMPP digunakan sebagai layanan basis data.
+**MikroTech** adalah webapp edukasi MikroTik yang menyajikan panduan konfigurasi jaringan dengan cara yang terstruktur dan mudah diikuti. Pembaca dapat menjelajahi artikel berdasarkan kategori, sementara admin mengelola konten melalui panel yang praktis.
 
-## Tema dan arah desain
+> **Fokus:** materi yang jelas, konfigurasi yang mudah dibaca, dan pengalaman belajar yang nyaman di desktop maupun ponsel.
 
-Tema visual: **Modern Network Lab** — profesional seperti dokumentasi teknis, tetapi ramah bagi pemula.
+## ✨ Fitur unggulan
 
-- Gunakan palet yang mengikuti `logo.jpg`: navy gelap sebagai warna utama, cyan sebagai aksen utama, oranye sebagai aksen sekunder, serta latar putih atau abu-abu muda untuk keterbacaan. Tampilkan logo pada header, footer, login admin, halaman Tentang, dan ikon tab browser.
-- Buat navigasi sederhana dan konsisten.
-- Utamakan tipografi dan jarak baca yang nyaman pada halaman artikel.
-- Tampilkan konfigurasi MikroTik dalam blok kode yang mudah dibedakan.
-- Gunakan ikon atau ilustrasi jaringan seperlunya agar halaman tidak terasa ramai.
-- Pastikan semua halaman nyaman digunakan di ponsel dan desktop.
+### Untuk pembaca
 
-## Cakupan fitur
+- Beranda dengan pencarian, kategori, dan artikel terbaru.
+- Artikel dengan URL yang mudah dibaca, gambar pendukung, dan konten Markdown.
+- Penelusuran berdasarkan kategori serta halaman FAQ, Kontak, dan Tentang.
+- Tampilan responsif dengan identitas visual MikroTech.
 
-### MVP — fitur versi pertama
+### Untuk admin
 
-#### Situs publik
+- Panel admin dengan autentikasi dan pengelolaan sesi berbasis MySQL.
+- Buat, edit, hapus, simpan sebagai draf, dan terbitkan artikel.
+- Kelola kategori, profil admin, dan pengaturan situs.
+- Pratinjau artikel sebelum disimpan dan kotak masuk untuk pesan pembaca.
 
-- **Beranda** dengan pengantar MikroTech, pencarian, kategori populer, dan artikel terbaru.
-- **Daftar artikel** dengan pencarian dan filter kategori.
-- **Halaman artikel** dengan judul, ringkasan, isi, gambar pendukung, dan blok konfigurasi.
-- **Halaman kategori** untuk menelusuri artikel berdasarkan topik.
-- **FAQ** untuk menjawab pertanyaan umum tentang panduan dan penggunaan MikroTech.
-- **Kontak** agar pembaca dapat mengirim pertanyaan, koreksi, atau saran.
-- **Halaman Tentang** yang menjelaskan tujuan dan cakupan MikroTech.
-- **Tampilan responsif** untuk ponsel, tablet, dan desktop.
-- **SEO dasar**, termasuk judul dan deskripsi halaman serta URL artikel yang mudah dibaca.
+### Dibangun dengan perhatian pada keamanan
 
-#### Panel admin
+- Kata sandi admin disimpan sebagai hash.
+- Perlindungan CSRF, Helmet, dan pembatasan percobaan login.
+- HTML mentah tidak diaktifkan dalam konten Markdown.
+- Kredensial lokal disimpan di `.env`, bukan di repositori.
 
-- Login admin untuk melindungi pengelolaan konten.
-- Halaman profil admin untuk mengganti username dan kata sandi dengan verifikasi kata sandi saat ini.
-- Halaman pengaturan situs untuk mengubah nama situs, tagline, dan deskripsi SEO.
-- Pratinjau artikel dari editor sebelum perubahan disimpan atau diterbitkan.
-- Kotak masuk admin untuk membaca dan mengelola pesan dari formulir Kontak.
-- Tambah, ubah, dan hapus artikel.
-- Simpan artikel sebagai draf atau publikasikan.
-- Tambah dan ubah kategori.
-- Isi artikel meliputi judul, slug, ringkasan, isi, gambar, kategori, dan status publikasi.
-- Validasi data sebelum artikel disimpan atau diterbitkan.
+## 🧰 Teknologi
 
-Isi artikel mendukung Markdown untuk judul (`##`/`###`), teks tebal (`**teks**`), daftar, garis pemisah (`---`), tautan, dan blok kode (termasuk blok `routeros`). Markdown yang ditempel sebagai satu baris juga dinormalisasi agar penanda subjudul, garis pemisah, dan daftar umum dapat dirender. HTML mentah tidak diaktifkan pada parser. URL gambar HTTP/HTTPS dapat ditambahkan sebagai gambar pendukung.
+| Area | Teknologi |
+|---|---|
+| Runtime | Node.js 20+ |
+| Server dan routing | Express 5 |
+| Template | EJS |
+| Database | MySQL |
+| Session | Express Session dan MySQL session store |
+| Keamanan | Helmet, bcryptjs, CSRF, dan rate limiting |
+| Konten artikel | Markdown-it |
 
-### Pengembangan setelah MVP
+## 🚀 Mulai cepat
 
-Fitur berikut bukan syarat peluncuran versi pertama dan dapat diprioritaskan berdasarkan kebutuhan:
+### Persyaratan
 
-- Bookmark artikel.
-- Komentar atau tanya jawab.
-- Umpan balik “Apakah panduan ini membantu?”
-- Artikel terkait dan navigasi ke panduan berikutnya.
-- Label tingkat kesulitan dan estimasi waktu baca.
-- Statistik artikel untuk admin.
-- Sitemap dan penyempurnaan SEO.
-- Mode gelap dan notifikasi artikel baru.
+- Node.js versi 20 atau lebih baru dan npm.
+- MySQL yang aktif, misalnya melalui XAMPP.
 
-## Kategori konten awal
+### 1. Pasang dependensi
 
-- Dasar MikroTik dan RouterOS
-- Konfigurasi jaringan dan routing
-- Firewall, NAT, dan keamanan
-- Hotspot, DHCP, dan Wi-Fi
-- Troubleshooting
+```bash
+npm ci
+```
 
-Kategori dapat dikelola admin; daftar ini menjadi titik awal untuk menyiapkan konten.
+### 2. Siapkan konfigurasi
 
-## Alur pengembangan
+Salin `.env.example` menjadi `.env`, lalu sesuaikan koneksi MySQL dan isi `SESSION_SECRET` dengan nilai acak minimal 32 karakter.
 
-### Tahap 1 — Fondasi proyek
+PowerShell:
 
-- Inisialisasi proyek Node.js dan Express.
-- Siapkan konfigurasi aplikasi dan variabel lingkungan.
-- Tentukan struktur folder untuk routes, views, public assets, dan akses basis data.
-- Buat layout EJS dasar, navigasi, dan gaya visual Modern Network Lab.
+```powershell
+Copy-Item .env.example .env
+```
 
-**Hasil yang diharapkan:** aplikasi dapat dijalankan secara lokal dan menampilkan halaman dasar.
+macOS / Linux:
 
-### Tahap 2 — Situs publik
+```bash
+cp .env.example .env
+```
 
-- Buat beranda dengan artikel terbaru dan kategori populer.
-- Buat daftar artikel, filter kategori, dan pencarian.
-- Buat halaman detail artikel dan halaman kategori.
-- Buat halaman Tentang serta tata letak responsif.
-- Tambahkan halaman FAQ dan formulir Kontak.
+### 3. Siapkan database
 
-**Hasil yang diharapkan:** pengunjung dapat menjelajahi halaman dan contoh konten dengan alur yang konsisten.
+Jalankan MySQL, lalu impor [`db/schema.sql`](./db/schema.sql) melalui phpMyAdmin atau MySQL CLI. Skrip ini membuat database `mikrotech`, tabel aplikasi, pengaturan awal, dan kategori bawaan.
 
-### Tahap 3 — Basis data dan konten
+### 4. Buat akun admin
 
-- Siapkan basis data MySQL dan konfigurasi koneksi.
-- Rancang tabel untuk admin, kategori, dan artikel.
-- Hubungkan daftar dan detail artikel dengan data basis data.
-- Pastikan hanya artikel terbit yang muncul di situs publik.
+Isi `ADMIN_USERNAME` dan `ADMIN_PASSWORD` di lingkungan terminal, lalu jalankan skrip pembuatan akun. Username harus 3–80 karakter dan kata sandi minimal 6 karakter.
 
-**Hasil yang diharapkan:** konten situs berasal dari MySQL, bukan data statis di template.
+PowerShell:
 
-### Tahap 4 — Panel admin
+```powershell
+$env:ADMIN_USERNAME = "admin"
+$env:ADMIN_PASSWORD = "ganti-dengan-kata-sandi-aman"
+npm run create-admin
+```
 
-- Buat login dan logout admin.
-- Lindungi route pengelolaan agar hanya dapat diakses setelah login.
-- Tambahkan halaman Profil untuk mengubah username dan kata sandi dengan verifikasi kata sandi saat ini.
-- Tambahkan halaman Pengaturan Situs untuk nama situs, tagline footer, dan deskripsi SEO.
-- Buat pratinjau artikel dari isi formulir sebelum disimpan.
-- Buat kotak masuk untuk pesan Kontak, termasuk tindakan tandai dibaca dan hapus.
-- Buat formulir untuk menambah dan mengubah artikel serta kategori.
-- Dukung status draf dan terbit, serta penghapusan dengan konfirmasi.
-- Validasi input dan tampilkan pesan keberhasilan atau kesalahan dengan jelas.
+macOS / Linux:
 
-**Hasil yang diharapkan:** admin dapat mengelola alur publikasi konten dari panel.
+```bash
+ADMIN_USERNAME=admin ADMIN_PASSWORD='ganti-dengan-kata-sandi-aman' npm run create-admin
+```
 
-### Tahap 5 — Penyempurnaan
+### 5. Jalankan aplikasi
 
-- Tambahkan pencarian dan filter yang bekerja terhadap data sebenarnya.
-- Periksa tampilan di ukuran layar ponsel dan desktop.
-- Lengkapi metadata halaman dan URL artikel.
-- Periksa validasi formulir, navigasi, halaman kosong, dan pesan kesalahan.
+```bash
+npm run dev
+```
 
-**Hasil yang diharapkan:** pengalaman penggunaan konsisten dan siap diuji sebelum peluncuran.
+Buka **[http://localhost:3000](http://localhost:3000)**. Panel admin tersedia di **[http://localhost:3000/admin/login](http://localhost:3000/admin/login)**.
 
-### Tahap 6 — Pengujian dan peluncuran
+Untuk menjalankan tanpa mode watch, gunakan `npm start`.
 
-- Uji halaman publik, pencarian, filter, login, dan pengelolaan artikel.
-- Pastikan artikel draf tidak terlihat oleh pengunjung.
-- Uji input tidak valid dan akses ke route admin tanpa login.
-- Dokumentasikan cara menyiapkan basis data dan menjalankan aplikasi.
-- Siapkan konfigurasi deployment sebelum aplikasi dipublikasikan.
+## ⚙️ Konfigurasi lingkungan
 
-**Hasil yang diharapkan:** alur utama berfungsi dan panduan menjalankan aplikasi tersedia.
-
-## Model data awal
-
-Rancangan berikut adalah panduan awal; detail kolom dapat disesuaikan ketika skema basis data dibuat.
-
-- **admins** — akun admin dan informasi autentikasi.
-- **app_settings** — nama situs, tagline, dan deskripsi SEO.
-- **contact_messages** — pesan, alamat email pengirim, status dibaca, dan waktu diterima.
-- **categories** — nama dan slug kategori.
-- **articles** — judul, slug, ringkasan, isi, gambar, status publikasi, waktu pembuatan/perubahan, serta relasi kategori.
-
-Slug artikel digunakan sebagai URL yang mudah dibaca dan harus unik.
-
-## Kriteria MVP selesai
-
-- Pengunjung dapat membuka beranda, daftar artikel, kategori, dan halaman artikel.
-- Pencarian dan filter kategori dapat digunakan.
-- Artikel draf tidak muncul di situs publik; artikel terbit dapat dibuka melalui URL yang sesuai.
-- Admin dapat login, mengelola artikel dan kategori, serta menyimpan draf atau menerbitkan artikel.
-- Admin dapat mengubah username, kata sandi, dan pengaturan dasar situs.
-- Admin dapat melihat pratinjau artikel dan mengelola pesan dari pengunjung.
-- Pengunjung dapat membaca FAQ dan mengirim pesan melalui halaman Kontak.
-- Halaman dan formulir utama berfungsi di desktop maupun ponsel.
-- Kredensial dan konfigurasi lokal tidak ditanam langsung ke source code.
-
-## Status implementasi
-
-Fondasi MVP sudah mencakup halaman publik, pencarian dan filter artikel, halaman artikel/kategori/FAQ/Kontak/Tentang, panel admin, pengelolaan artikel dan kategori, pratinjau artikel, kotak masuk pesan, profil admin, pengaturan situs, skema MySQL, serta skrip pembuatan akun admin. Pesan kontak disimpan di database lokal dan dapat dibalas melalui aplikasi email admin; pengiriman email otomatis belum dikonfigurasi. Fitur lanjutan seperti komentar, bookmark, statistik pembaca, dan mode gelap belum termasuk dalam implementasi awal.
-
-## Menjalankan aplikasi secara lokal
-
-### Persiapan
-
-- Node.js versi 20 atau lebih baru.
-- MySQL yang berjalan melalui XAMPP atau instalasi MySQL lain.
-- Terminal pada folder proyek.
-
-### Instalasi pertama
-
-1. Salin `.env.example` menjadi `.env`, lalu sesuaikan pengaturan koneksi MySQL.
-2. Isi `SESSION_SECRET` dengan nilai acak minimal 32 karakter. Jangan gunakan nilai contoh pada deployment.
-3. Jalankan MySQL di XAMPP.
-4. Impor `db/schema.sql` melalui phpMyAdmin atau MySQL CLI. Skrip ini membuat database `mikrotech`, tabel awal, dan kategori bawaan.
-5. Pasang dependensi:
-
-   ```sh
-   npm install
-   ```
-
-6. Buat akun admin dengan mengisi `ADMIN_USERNAME` dan `ADMIN_PASSWORD` pada lingkungan proses, lalu jalankan:
-
-   ```sh
-   npm run create-admin
-   ```
-
-   Username harus berisi 3–80 karakter dan kata sandi minimal 6 karakter. Kata sandi disimpan sebagai hash.
-
-7. Jalankan aplikasi:
-
-   ```sh
-   npm run dev
-   ```
-
-8. Buka `http://localhost:3000`. Panel admin tersedia di `http://localhost:3000/admin/login`.
-
-Untuk menjalankan tanpa mode watch, gunakan `npm start`. Pastikan `.env` tidak dimasukkan ke repositori.
-
-### Variabel lingkungan
-
-| Variabel | Kegunaan | Nilai bawaan |
+| Variabel | Fungsi | Nilai contoh |
 |---|---|---|
-| `NODE_ENV` | Mode aplikasi; gunakan `production` di deployment HTTPS | `development` |
-| `PORT` | Port server Node.js | `3000` |
-| `SESSION_SECRET` | Rahasia penandatanganan sesi, minimal 32 karakter | Wajib diisi |
+| `NODE_ENV` | Mode aplikasi | `development` |
+| `PORT` | Port server | `3000` |
+| `SESSION_SECRET` | Rahasia sesi, minimal 32 karakter | Buat nilai acak sendiri |
 | `DB_HOST` | Host MySQL | `127.0.0.1` |
 | `DB_PORT` | Port MySQL | `3306` |
 | `DB_NAME` | Nama database | `mikrotech` |
 | `DB_USER` | Pengguna MySQL | `root` |
-| `DB_PASSWORD` | Kata sandi pengguna MySQL | kosong |
+| `DB_PASSWORD` | Kata sandi MySQL | Sesuai konfigurasi lokal |
 
-`ADMIN_USERNAME` dan `ADMIN_PASSWORD` hanya dibutuhkan ketika membuat akun admin.
+`ADMIN_USERNAME` dan `ADMIN_PASSWORD` hanya diperlukan saat menjalankan `npm run create-admin`. Jangan gunakan kredensial contoh untuk deployment dan jangan unggah file `.env`.
 
-## Prinsip pengembangan
+## 🗂️ Struktur proyek
 
-- Bangun fitur MVP terlebih dahulu sebelum menambah fitur lanjutan.
-- Pisahkan tampilan, routing, dan akses basis data dengan struktur yang jelas.
-- Validasi input dan berikan pesan kesalahan yang informatif.
-- Lindungi halaman admin dan data autentikasi.
-- Jangan menyimpan kata sandi dalam bentuk teks biasa atau mengunggah kredensial ke repositori.
-- Uji alur publik dan admin setiap kali fitur terkait berubah.
+```text
+MikroTech/
+├── db/                 # Skema database
+├── public/             # CSS, JavaScript, dan aset publik
+├── scripts/            # Utilitas pembuatan admin
+├── src/
+│   ├── middleware/     # Autentikasi dan perlindungan CSRF
+│   ├── routes/         # Route publik dan admin
+│   └── utils/          # Markdown dan slug
+├── tests/              # Pengujian otomatis
+└── views/              # Template halaman EJS
+```
+
+## 🧪 Pengujian
+
+Jalankan seluruh tes dengan:
+
+```bash
+npm test
+```
+
+## 🛣️ Cakupan dan pengembangan berikutnya
+
+MikroTech saat ini berfokus pada pengalaman membaca, publikasi artikel, dan pengelolaan dasar oleh admin. Fitur seperti bookmark, komentar, statistik pembaca, sitemap, dan mode gelap dapat dikembangkan pada tahap berikutnya.
+
+Sebelum deployment, siapkan konfigurasi produksi secara terpisah: rahasia sesi yang kuat, database yang diamankan, HTTPS, serta proses backup dan pemeliharaan.
+
+## 🤝 Kontribusi
+
+Ide, laporan bug, dan kontribusi sangat disambut. Silakan buat **Issue** untuk mendiskusikan perubahan besar sebelum membuka **Pull Request**.
+
+## 📄 Lisensi
+
+Belum ada lisensi open-source yang ditetapkan untuk repositori ini.
+
+---
+
+<div align="center">
+  Dibuat untuk para pembelajar jaringan. <strong>Selamat bereksperimen!</strong>
+</div>
